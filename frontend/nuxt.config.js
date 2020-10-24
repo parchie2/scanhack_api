@@ -6,7 +6,7 @@ export default {
    ** Headers of the page
    */
   server: {
-    port: 8000 // デフォルト: 3000
+    port: 80 // デフォルト: 3000
   },
   head: {
     titleTemplate: '%s - ' + process.env.npm_package_name,
