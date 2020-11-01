@@ -1,24 +1,10 @@
-# README
+## セットアップ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### 環境変数
 
-Things you may want to cover:
+事前に開発者から渡された GoogleCloudPlatform の秘密鍵(scanhack_gcp.json
+)を共有してもらってください(json 形式).
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+export GOOGLE_APPLICATION_CREDENTIALS=`共有されたファイルのパス`
+```
