@@ -17,7 +17,7 @@ module Api
         if user.save
           render json: { status: 200, data: user }
         else
-          render status: :unprocessable_entity, json: { message: user.errors.full_messages }
+          render  status: :unprocessable_entity, json:{ message: user.errors.full_messages }
         end
       end
 
@@ -26,7 +26,7 @@ module Api
         if !user.nil?
           render json: { status: 200, data: user.token }
         else
-          render json: { status: 401, message: "ログインに失敗しました" }
+          render status: :unprocessable_entity, json: { message: "ログインに失敗しました" }
         end
       end
 
