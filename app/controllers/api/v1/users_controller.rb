@@ -25,7 +25,7 @@ module Api
         if !user.nil?
           render json: { status: 200, data: user.token }
         else
-          render json: { status: 401, message: 'ログインに失敗しました' }
+          render json: { status: 401, message: "ログインに失敗しました" }
         end
       end
 
@@ -35,24 +35,21 @@ module Api
       end
 
       private
-
-      def user_params
-        params.permit(:name)
-      end
-
-      def current_send_user
-        authenticate_or_request_with_http_token do |token, _options|
-          current_send_user = User.find_by(token: token)
+        def user_params
+          params.permit(:name)
         end
-      end
 
-      def authenticate
-        authenticate_or_request_with_http_token do |token, _options|
-          auth_user = User.find_by(token: token)
-          !auth_user.nil? ? true : false
-          # !!auth_user
+        def current_send_user
+          authenticate_or_request_with_http_token do |token, _options|
+            User.find_by(token: token)
+          end
         end
-      end
+
+        def authenticate
+          authenticate_or_request_with_http_token do |token, _options|
+            User.exists?(token: token)
+          end
+        end
     end
   end
 end
