@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class ImageAnnotationController < ApplicationController
+    class ImageAnnotateController < ApplicationController
       def show
         label_annotations = GoogleCloud::ImageAnnotatorService.new("./bag.jpg").call!
         render status: :ok, json: { labels: label_annotations }
