@@ -25,6 +25,9 @@ gem "bootsnap", ">= 1.4.2", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+# 日本語化対応
+gem "rails-i18n", "~> 6.0.0" # For 6.0.0 or higher
+
 # 画像認識
 gem "google-cloud-vision"
 
