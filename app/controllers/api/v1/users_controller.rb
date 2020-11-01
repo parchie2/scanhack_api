@@ -13,7 +13,6 @@ module Api
 
       def create
         user = User.new(user_params)
-        logger.debug(user_params)
         if user.save
           render json: { status: 200, data: user }
         else
