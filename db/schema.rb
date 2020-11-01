@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_11_01_083948) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "token"
-    t.index ["name"], name: "index_users_on_name"
+    t.index ["name"], name: "index_users_on_name", unique: true
   end
 
 end
