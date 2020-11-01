@@ -12,7 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2020_11_01_083948) do
 
-# Could not dump table "users" because of following StandardError
-#   Unknown type 'token' for column 'token'
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "token"
+    t.index ["name"], name: "index_users_on_name"
+  end
 
 end
