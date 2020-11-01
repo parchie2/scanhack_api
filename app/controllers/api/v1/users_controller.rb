@@ -8,30 +8,30 @@ module Api
 
       def show
         user = User.find(params[:id])
-        render json: { status: 200, data: user }
+        render json: { data: user }
       end
 
       def create
         user = User.new(user_params)
         if user.save
-          render json: { status: 200, data: user }
+          render json: { data: user }
         else
-          render json: { status: 400, message: user.errors.full_messages }
+          render  status: :unprocessable_entity, json:{ message: user.errors.full_messages }
         end
       end
 
       def login
         user = User.find_by(name: params[:name])
         if !user.nil?
-          render json: { status: 200, data: user.token }
+          render json: { data: user.token }
         else
-          render json: { status: 401, message: "ログインに失敗しました" }
+          render status: :unprocessable_entity, json: { message: "ログインに失敗しました" }
         end
       end
 
       def current_user
         current_user = current_send_user
-        render json: { status: 200, data: current_user }
+        render json: { data: current_user }
       end
 
       private
