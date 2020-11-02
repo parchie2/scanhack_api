@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     namespace "v1" do
       get "image_annotate", to: "image_annotate#show"
       get "translate", to: "translate#show"
+      get "synonyms", to: "synonyms#show"
       resources :users do
         collection do
           post :signup, to: "users#create"
