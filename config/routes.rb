@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     namespace "v1" do
       get "image_annotation", to: "image_annotation#show"
       resources :users do
+        resources :items, module: :users
         collection do
           post :signup, to: "users#create"
           post :login, to: "users#login"
