@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace "api" do
     namespace "v1" do
+      get "synonyms", to: "synonyms#show"
       get "image_annotation", to: "image_annotation#show"
       resources :users do
         collection do
