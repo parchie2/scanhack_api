@@ -2,10 +2,10 @@
 
 module Api
   module V1
-    class ImageAnnotationController < ApplicationController
+    class TranslateController < ApplicationController
       def show
-        label_annotations = GoogleCloud::ImageAnnotatorService.new("./bag.jpg").call!
-        render status: :ok, json: { labels: label_annotations }
+        translations = GoogleCloud::TranslatorService.new(["財布"]).call!
+        render status: :ok, json: { translations: translations }
       rescue StandardError => error
         Rails.logger.error error
         render status: :unprocessable_entity

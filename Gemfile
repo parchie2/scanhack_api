@@ -28,8 +28,11 @@ gem 'rack-cors'
 # 日本語化対応
 gem "rails-i18n", "~> 6.0.0"
 
-# 画像認識
+# Google Cloud Platform 画像認識
 gem "google-cloud-vision"
+
+# Google Cloud Platform 翻訳
+gem "google-cloud-translate"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
