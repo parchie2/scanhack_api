@@ -8,5 +8,4 @@
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=`共有されたファイルのパス/scanhack_gcp.json`
 export RAPIDAPI_KEY=
-
 ```
