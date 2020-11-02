@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'uri'
-require 'net/http'
-require 'openssl'
+require "uri"
+require "net/http"
+require "openssl"
 
 module RapidApi
   class SynonymProviderService
@@ -20,8 +20,8 @@ module RapidApi
 
       # Set a header
       request = Net::HTTP::Get.new(url)
-      request["x-rapidapi-host"] = 'wordsapiv1.p.rapidapi.com'
-      request["x-rapidapi-key"] = ENV['RAPIDAPI_KEY']
+      request["x-rapidapi-host"] = "wordsapiv1.p.rapidapi.com"
+      request["x-rapidapi-key"] = ENV["RAPIDAPI_KEY"]
 
       response = http.request(request)
       JSON.parse(response.read_body)["synonyms"]
