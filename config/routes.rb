@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get "translate", to: "translate#show"
       get "synonyms", to: "synonyms#show"
       resources :users do
+        resources :items, module: :users
         collection do
           post :signup, to: "users#create"
           post :login, to: "users#login"
