@@ -5,13 +5,18 @@ module Api
     class TranslateController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
       def show
-        label_annotations = ["bug", "wallet"]
+        label_annotations = ["Wallet", "Coin purse"]
         synonyms = []
         label_annotations.each do |label_annotation|
           synonyms << RapidApi::SynonymProviderService.new(label_annotation).call!
           synonyms.push(label_annotation)
+          rescue StandardError => error
+            synonyms << []
+            synonyms.push(label_annotation)
         end
+        binding.pry
         down_syonyms = synonyms.flatten.map(&:downcase)
+        binding.pry
         translations = GoogleCloud::TranslatorService.new(current_send_user.items.map(&:name)).call!.map(&:downcase)
         losts = translations - down_syonyms
         lost_indexes = losts.map{|lost| translations.index(lost)}
