@@ -19,7 +19,6 @@ module Api
             synonyms << []
             synonyms.push(label_annotation)
         end
-        binding.pry
         down_syonyms = synonyms.flatten.map(&:downcase)
         translations = GoogleCloud::TranslatorService.new(current_send_user.items.map(&:name)).call!.map(&:downcase)
         losts = translations - down_syonyms
