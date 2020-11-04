@@ -5,11 +5,19 @@ module Api
     class TranslateController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
       def show
-        binding.pry
-        synonyms = RapidApi::SynonymProviderService.new(["bug", "wallet"]).call!
-        translations = GoogleCloud::TranslatorService.new(current_send_user.items.map(&:name)).call!
-        binding.pry
-        render status: :ok, json: { translations: translations }
+        label_annotations = ["bug", "wallet"]
+        synonyms = []
+        label_annotations.each do |label_annotation|
+          synonyms << RapidApi::SynonymProviderService.new(label_annotation).call!
+          synonyms.push(label_annotation)
+        end
+        down_syonyms = synonyms.flatten.map(&:downcase)
+        translations = GoogleCloud::TranslatorService.new(current_send_user.items.map(&:name)).call!.map(&:downcase)
+        losts = translations - down_syonyms
+        lost_indexes = losts.map{|lost| translations.index(lost)}
+        lost_data = lost_indexes.map{|lost_index| current_send_user.items.map(&:name)[lost_index]}
+
+        render status: :ok, json: { data: lost_data }
       rescue StandardError => error
         Rails.logger.error error
         render status: :unprocessable_entity
