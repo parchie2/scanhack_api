@@ -19,7 +19,13 @@ module Api
             synonyms << []
             synonyms.push(label_annotation)
         end
+        logger.debug("synonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonyms")
+        logger.debug(synonyms)
         down_syonyms = synonyms.flatten.map(&:downcase)
+        logger.debug("current_send_usercurrent_send_usercurrent_send_usercurrent_send_usercurrent_send_usercurrent_send_usercurrent_send_usercurrent_send_usercurrent_send_user")
+        logger.debug(current_send_user)
+        logger.debug("current_send_user.itemscurrent_send_user.itemscurrent_send_user.itemscurrent_send_user.itemscurrent_send_user.itemscurrent_send_user.itemscurrent_send_user")
+        logger.debug(current_send_user.items)
         translations = GoogleCloud::TranslatorService.new(current_send_user.items.map(&:name)).call!.map(&:downcase)
         losts = translations - down_syonyms
         lost_indexes = losts.map{|lost| translations.index(lost)}
