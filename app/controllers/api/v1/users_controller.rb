@@ -23,7 +23,7 @@ module Api
       def login
         user = User.find_by(name: params[:name])
         if !user.nil?
-          render json: { data: user.token }
+          render json: { data: user }
         else
           render status: :unprocessable_entity, json: { message: "ログインに失敗しました" }
         end
