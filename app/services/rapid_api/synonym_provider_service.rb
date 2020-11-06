@@ -11,7 +11,7 @@ module RapidApi
     end
 
     def call!
-      url = URI("https://wordsapiv1.p.rapidapi.com/words/#{@word}/synonyms")
+      url = URI(URI.encode("https://wordsapiv1.p.rapidapi.com/words/#{@word}/synonyms"))
 
       # Instanties a client
       http = Net::HTTP.new(url.host, url.port)

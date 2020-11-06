@@ -11,26 +11,11 @@ module Api
         label_annotations = GoogleCloud::ImageAnnotatorService.new(file_path).call!
         FileUtils.rm(file_path)
         synonyms = []
-        logger.debug("label_annotationslabel_annotationslabel_annotationslabel_annotationslabel_annotationslabel_annotationslabel_annotations")
-        logger.debug(label_annotations)
         label_annotations.each do |label_annotation|
-          logger.debug("single_label_annotationsingle_label_annotationsingle_label_annotationsingle_label_annotationsingle_label_annotationsing")
-          logger.debug(label_annotation)
-  
           synonyms << RapidApi::SynonymProviderService.new(label_annotation).call!
           synonyms.push(label_annotation)
-          # if not exit synonyms
-          rescue StandardError => error
-            synonyms << []
-            synonyms.push(label_annotation)
         end
-        logger.debug("current_send_usercurrent_send_usercurrent_send_usercurrent_send_usercurrent_send_usercurrent_send_usercurrent_send_usercurrent_send_usercurrent_send_user")
-        logger.debug(current_send_user)
-        logger.debug("current_send_user.itemscurrent_send_user.itemscurrent_send_user.itemscurrent_send_user.itemscurrent_send_user.itemscurrent_send_user.itemscurrent_send_user")
-        logger.debug(current_send_user.items)
-        logger.debug("synonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonymssynonyms")
-        logger.debug(synonyms)
-        down_syonyms = synonyms.flatten.map(&:downcase)
+        down_syonyms = synonyms.flatten.compact.map(&:downcase)
         translations = GoogleCloud::TranslatorService.new(current_send_user.items.map(&:name)).call!.map(&:downcase)
         losts = translations - down_syonyms
         lost_indexes = losts.map{|lost| translations.index(lost)}
