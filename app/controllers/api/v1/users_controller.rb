@@ -30,8 +30,11 @@ module Api
       end
 
       def current_user
-        current_user = current_send_user
-        render json: { data: current_user }
+        if !current_send_user.nil?
+          render json: { data: current_user }
+        else
+          render status: :unprocessable_entity, json: { message: "ユーザーの取得に失敗しました" }
+        end
       end
 
       private
